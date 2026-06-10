@@ -1,183 +1,147 @@
-Add-Type -AssemblyName System.Windows.Forms
-Add-Type -AssemblyName System.Drawing
 
-$form = New-Object System.Windows.Forms.Form
-$form.Text = "CC Remover - By Mizzery"
-$form.Size = New-Object System.Drawing.Size(750,550)
-$form.StartPosition = "CenterScreen"
+# CC Remover - By Mizzery
+# Single-file WPF version
 
-$label = New-Object System.Windows.Forms.Label
-$label.Text = "Select a folder containing source code:"
-$label.Location = New-Object System.Drawing.Point(10,15)
-$label.AutoSize = $true
-$form.Controls.Add($label)
+Add-Type -AssemblyName PresentationFramework,PresentationCore,WindowsBase
+[xml]$xaml = @"
+<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="CC Remover - By Mizzery"
+        Height="700" Width="1000"
+        WindowStartupLocation="CenterScreen"
+        Background="#1E1E1E">
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
 
-$txtPath = New-Object System.Windows.Forms.TextBox
-$txtPath.Location = New-Object System.Drawing.Point(10,40)
-$txtPath.Size = New-Object System.Drawing.Size(580,25)
-$form.Controls.Add($txtPath)
+        <TextBlock Text="CC Remover - By Mizzery"
+                   FontSize="28"
+                   Foreground="White"
+                   Margin="0,0,0,10"/>
 
-$btnBrowse = New-Object System.Windows.Forms.Button
-$btnBrowse.Text = "Browse"
-$btnBrowse.Location = New-Object System.Drawing.Point(600,38)
-$form.Controls.Add($btnBrowse)
+        <StackPanel Grid.Row="1" Orientation="Horizontal">
+            <TextBox Name="FolderBox" Width="750" Height="30"/>
+            <Button Name="BrowseBtn" Content="Browse" Width="100" Margin="10,0,0,0"/>
+        </StackPanel>
 
-$btnRun = New-Object System.Windows.Forms.Button
-$btnRun.Text = "Remove Comments"
-$btnRun.Location = New-Object System.Drawing.Point(10,75)
-$form.Controls.Add($btnRun)
+        <WrapPanel Grid.Row="2" Margin="0,10">
+            <CheckBox Name="JSBox" Content="JS/TS" IsChecked="True" Foreground="White" Margin="10"/>
+            <CheckBox Name="HTMLBox" Content="HTML/CSS" IsChecked="True" Foreground="White" Margin="10"/>
+            <CheckBox Name="CSBox" Content="C#" IsChecked="True" Foreground="White" Margin="10"/>
+            <CheckBox Name="CPPBox" Content="C/C++" IsChecked="True" Foreground="White" Margin="10"/>
+            <CheckBox Name="JavaBox" Content="Java" IsChecked="True" Foreground="White" Margin="10"/>
+            <CheckBox Name="PHPBox" Content="PHP" IsChecked="True" Foreground="White" Margin="10"/>
+        </WrapPanel>
 
-$progressBar = New-Object System.Windows.Forms.ProgressBar
-$progressBar.Location = New-Object System.Drawing.Point(150,78)
-$progressBar.Size = New-Object System.Drawing.Size(530,20)
-$form.Controls.Add($progressBar)
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
 
-$output = New-Object System.Windows.Forms.RichTextBox
-$output.Location = New-Object System.Drawing.Point(10,110)
-$output.Size = New-Object System.Drawing.Size(710,390)
-$output.ReadOnly = $true
-$form.Controls.Add($output)
+            <RichTextBox Name="LogBox" Margin="0,0,10,0"/>
 
-$folderDialog = New-Object System.Windows.Forms.FolderBrowserDialog
+            <StackPanel Grid.Column="1">
+                <TextBlock Name="FilesFound" Foreground="White" Margin="0,5" Text="Files Found: 0"/>
+                <TextBlock Name="FilesProcessed" Foreground="White" Margin="0,5" Text="Processed: 0"/>
+                <TextBlock Name="CommentsRemoved" Foreground="White" Margin="0,5" Text="Comments Removed: 0"/>
+                <TextBlock Name="Elapsed" Foreground="White" Margin="0,5" Text="Elapsed: 0s"/>
+            </StackPanel>
+        </Grid>
 
-$btnBrowse.Add_Click({
-    if ($folderDialog.ShowDialog() -eq "OK") {
-        $txtPath.Text = $folderDialog.SelectedPath
+        <StackPanel Grid.Row="4">
+            <ProgressBar Name="ProgressBar" Height="25"/>
+            <WrapPanel Margin="0,10">
+                <Button Name="RunBtn" Content="Remove Comments" Width="150"/>
+                <Button Name="RestoreBtn" Content="Restore Backups" Width="150" Margin="10,0,0,0"/>
+            </WrapPanel>
+        </StackPanel>
+    </Grid>
+</Window>
+"@
+
+$reader = New-Object System.Xml.XmlNodeReader $xaml
+$Window = [Windows.Markup.XamlReader]::Load($reader)
+
+$FolderBox = $Window.FindName("FolderBox")
+$BrowseBtn = $Window.FindName("BrowseBtn")
+$RunBtn = $Window.FindName("RunBtn")
+$RestoreBtn = $Window.FindName("RestoreBtn")
+$LogBox = $Window.FindName("LogBox")
+$ProgressBar = $Window.FindName("ProgressBar")
+$FilesFound = $Window.FindName("FilesFound")
+$FilesProcessed = $Window.FindName("FilesProcessed")
+$CommentsRemoved = $Window.FindName("CommentsRemoved")
+$Elapsed = $Window.FindName("Elapsed")
+
+$BrowseBtn.Add_Click({
+    Add-Type -AssemblyName System.Windows.Forms
+    $dlg = New-Object System.Windows.Forms.FolderBrowserDialog
+    if($dlg.ShowDialog() -eq "OK"){
+        $FolderBox.Text = $dlg.SelectedPath
     }
 })
 
-function Remove-CodeComments {
-    param(
-        [string]$File,
-        [string]$RootFolder
-    )
+$RestoreBtn.Add_Click({
+    [System.Windows.MessageBox]::Show("Restore Backups feature placeholder.")
+})
 
-    try {
-        $content = Get-Content $File -Raw -Encoding UTF8
-
-        # Create backup folder
-        $backupRoot = Join-Path $RootFolder "Backups"
-
-        if (-not (Test-Path $backupRoot)) {
-            New-Item -ItemType Directory -Path $backupRoot -Force | Out-Null
-        }
-
-        # Preserve folder structure
-        $relativePath = $File.Substring($RootFolder.Length).TrimStart('\')
-        $backupFile = Join-Path $backupRoot ($relativePath + ".bak")
-
-        $backupDir = Split-Path $backupFile -Parent
-
-        if (-not (Test-Path $backupDir)) {
-            New-Item -ItemType Directory -Path $backupDir -Force | Out-Null
-        }
-
-        Copy-Item $File $backupFile -Force
-
-        # Remove multiline comments
-        $content = [regex]::Replace(
-            $content,
-            '/\*[\s\S]*?\*/',
-            '',
-            [System.Text.RegularExpressions.RegexOptions]::Singleline
-        )
-
-        # Remove single-line comments
-        $content = [regex]::Replace(
-            $content,
-            '(?m)^\s*//.*?$',
-            ''
-        )
-
-        # Remove HTML comments
-        $content = [regex]::Replace(
-            $content,
-            '<!--[\s\S]*?-->',
-            '',
-            [System.Text.RegularExpressions.RegexOptions]::Singleline
-        )
-
-        Set-Content -Path $File -Value $content -Encoding UTF8
-
-        return $true
-    }
-    catch {
-        return $false
-    }
-}
-
-$btnRun.Add_Click({
-
-    $output.Clear()
-
-    if (-not (Test-Path $txtPath.Text)) {
-        [System.Windows.Forms.MessageBox]::Show(
-            "Please select a valid folder.",
-            "CC Remover"
-        )
+$RunBtn.Add_Click({
+    $root = $FolderBox.Text
+    if(!(Test-Path $root)){
+        [System.Windows.MessageBox]::Show("Select a valid folder.")
         return
     }
 
-    $extensions = @(
-        "*.js","*.ts","*.jsx","*.tsx",
-        "*.css","*.html","*.htm",
-        "*.java",
-        "*.c","*.cpp","*.h","*.hpp",
-        "*.cs",
-        "*.php"
-    )
+    $start = Get-Date
+    $backupRoot = Join-Path $root "Backups"
+    New-Item -ItemType Directory -Force -Path $backupRoot | Out-Null
 
-    $files = foreach ($ext in $extensions) {
-        Get-ChildItem $txtPath.Text -Recurse -File -Filter $ext -ErrorAction SilentlyContinue
-    }
+    $files = Get-ChildItem $root -Recurse -File |
+        Where-Object {
+            $_.FullName -notmatch '\\Backups\\' -and
+            $_.Extension -match '\.(js|ts|jsx|tsx|css|html|htm|cs|c|cpp|h|hpp|java|php)$'
+        }
 
-    # Skip Backups folder if it already exists
-    $files = $files | Where-Object {
-        $_.FullName -notmatch '\\Backups\\'
-    }
+    $FilesFound.Text = "Files Found: $($files.Count)"
+    $ProgressBar.Maximum = [Math]::Max($files.Count,1)
 
-    $total = $files.Count
     $processed = 0
-    $success = 0
+    $removed = 0
 
-    if ($total -eq 0) {
-        [System.Windows.Forms.MessageBox]::Show(
-            "No supported code files found.",
-            "CC Remover"
-        )
-        return
-    }
-
-    $progressBar.Maximum = $total
-    $progressBar.Value = 0
-
-    foreach ($file in $files) {
-
+    foreach($file in $files){
         $processed++
 
-        if (Remove-CodeComments $file.FullName $txtPath.Text) {
-            $success++
-            $output.AppendText("[OK] $($file.FullName)`r`n")
-        }
-        else {
-            $output.AppendText("[FAILED] $($file.FullName)`r`n")
-        }
+        $relative = $file.FullName.Substring($root.Length).TrimStart('\')
+        $backup = Join-Path $backupRoot ($relative + ".bak")
 
-        $progressBar.Value = $processed
-        $form.Refresh()
+        New-Item -ItemType Directory -Force -Path (Split-Path $backup) | Out-Null
+        Copy-Item $file.FullName $backup -Force
+
+        $content = Get-Content $file.FullName -Raw
+        $before = $content.Length
+
+        $content = [regex]::Replace($content,'/\*[\s\S]*?\*/','')
+        $content = [regex]::Replace($content,'(?m)^\s*//.*?$','')
+        $content = [regex]::Replace($content,'<!--[\s\S]*?-->','')
+
+        $removed += ($before - $content.Length)
+
+        Set-Content $file.FullName $content
+
+        $LogBox.AppendText("OK: $($file.FullName)`r`n")
+        $FilesProcessed.Text = "Processed: $processed"
+        $CommentsRemoved.Text = "Comments Removed: $removed"
+        $Elapsed.Text = "Elapsed: $([int]((Get-Date)-$start).TotalSeconds)s"
+        $ProgressBar.Value = $processed
     }
 
-    $output.AppendText("`r`n=========================================`r`n")
-    $output.AppendText("CC Remover Complete`r`n")
-    $output.AppendText("Files Found: $total`r`n")
-    $output.AppendText("Files Processed: $processed`r`n")
-    $output.AppendText("Successful: $success`r`n")
-    $output.AppendText("Backups Saved To: $($txtPath.Text)\Backups`r`n")
-
-    [System.Windows.Forms.MessageBox]::Show(
-        "Comment removal complete.`n`nProcessed $processed files.",
-        "CC Remover - By Mizzery"
-    )
+    [System.Windows.MessageBox]::Show("Completed!")
 })
 
-[void]$form.ShowDialog()
+$Window.ShowDialog() | Out-Null
