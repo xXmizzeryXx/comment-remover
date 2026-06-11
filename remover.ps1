@@ -1167,10 +1167,13 @@ function Show-Toast {
     $timer = New-Object System.Windows.Threading.DispatcherTimer
     $timer.Interval = [TimeSpan]::FromMilliseconds($DurationMs)
     $timer.Add_Tick({
-        $ToastPanel.Visibility = "Collapsed"
-        $timer.Stop()
-    })
-    $timer.Start()
+    param($sender, $eventArgs)
+
+    $ToastPanel.Visibility = "Collapsed"
+    $sender.Stop()
+})
+
+$timer.Start()
 }
 
 function Switch-Page {
