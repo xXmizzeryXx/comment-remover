@@ -448,7 +448,7 @@ Add-Type -AssemblyName System.Windows.Forms
                 <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0,0,0,12">
                     <TextBlock Text="PAGES" Foreground="{StaticResource TextMuted}" FontSize="11" FontWeight="SemiBold" LetterSpacing="0.4"/>
                     <Rectangle Width="1" Height="12" Fill="#2A3F68" Margin="12,0,12,0"/>
-                    <TextBlock Text="Explore & manage" Foreground="{StaticResource TextSub}" FontSize="11"/>
+                    <TextBlock Text="Explore &amp; manage" Foreground="{StaticResource TextSub}" FontSize="11"/>
                 </StackPanel>
 
                 <!-- Nav Buttons -->
@@ -615,7 +615,7 @@ Add-Type -AssemblyName System.Windows.Forms
                                 <StackPanel>
                                     <TextBlock Text="Helpful shortcuts" Foreground="{StaticResource TextPrimary}" FontSize="16" FontWeight="SemiBold" Margin="0,0,0,14"/>
                                     <StackPanel>
-                                        <TextBlock Text="• Drag & drop any folder to load it instantly." Foreground="{StaticResource TextSub}" FontSize="12"/>
+                                        <TextBlock Text="• Drag &amp; drop any folder to load it instantly." Foreground="{StaticResource TextSub}" FontSize="12"/>
                                         <TextBlock Text="• Toggle inline-only mode from Settings to preserve multi-line docs." Foreground="{StaticResource TextSub}" FontSize="12" Margin="0,10,0,0"/>
                                         <TextBlock Text="• Backups are stored alongside your project inside CC_Backups_*." Foreground="{StaticResource TextSub}" FontSize="12" Margin="0,10,0,0"/>
                                     </StackPanel>
