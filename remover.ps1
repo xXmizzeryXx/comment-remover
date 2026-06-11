@@ -398,7 +398,7 @@ Add-Type -AssemblyName System.Windows.Forms
                 <!-- Nav Label -->
                 <TextBlock DockPanel.Dock="Top" Text="NAVIGATION"
                            Foreground="{StaticResource TextMuted}" FontSize="10" FontWeight="SemiBold"
-                           Margin="26,0,0,8" LetterSpacing="1"/>
+                           Margin="26,0,0,8"/>
 
                 <!-- Nav Buttons -->
                 <StackPanel DockPanel.Dock="Top">
@@ -414,7 +414,7 @@ Add-Type -AssemblyName System.Windows.Forms
                     <Border Background="{StaticResource BgCard}" CornerRadius="12" Padding="14,14">
                         <StackPanel>
                             <TextBlock Text="SESSION STATS" Foreground="{StaticResource TextMuted}"
-                                       FontSize="10" FontWeight="SemiBold" Margin="0,0,0,10" LetterSpacing="1"/>
+                                       FontSize="10" FontWeight="SemiBold" Margin="0,0,0,10"/>
                             <Grid Margin="0,0,0,6">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"/>
@@ -567,7 +567,7 @@ Add-Type -AssemblyName System.Windows.Forms
 
                                 <Separator Background="{StaticResource Border1}" Margin="0,20,0,16" Height="1"/>
 
-                                <TextBlock Text="Last Scan" Foreground="{StaticResource TextMuted}" FontSize="11" FontWeight="SemiBold" Margin="0,0,0,8" LetterSpacing="1"/>
+                                <TextBlock Text="Last Scan" Foreground="{StaticResource TextMuted}" FontSize="11" FontWeight="SemiBold" Margin="0,0,0,8"/>
                                 <TextBlock x:Name="HomeLastFolder" Text="No folder scanned yet" Foreground="{StaticResource TextSub}" FontSize="12" TextWrapping="Wrap"/>
                                 <TextBlock x:Name="HomeLastTime" Text="" Foreground="{StaticResource TextMuted}" FontSize="11" Margin="0,4,0,0"/>
                             </StackPanel>
@@ -617,7 +617,7 @@ Add-Type -AssemblyName System.Windows.Forms
                         <!-- File Type Checkboxes -->
                         <StackPanel Grid.Row="1" Margin="0,0,0,16">
                             <TextBlock Text="FILE TYPES" Foreground="{StaticResource TextMuted}" FontSize="10" FontWeight="SemiBold"
-                                       Margin="0,0,0,10" LetterSpacing="1"/>
+                                       Margin="0,0,0,10"/>
                             <WrapPanel>
                                 <CheckBox x:Name="ChkJS"  Content="JS / TS" IsChecked="True" Margin="0,0,20,6"/>
                                 <CheckBox x:Name="ChkJSX" Content="JSX / TSX" IsChecked="True" Margin="0,0,20,6"/>
@@ -680,7 +680,7 @@ Add-Type -AssemblyName System.Windows.Forms
                             BorderBrush="{StaticResource Border1}" BorderThickness="1">
                         <StackPanel>
                             <TextBlock Text="LIVE PROGRESS" Foreground="{StaticResource Accent}"
-                                       FontSize="11" FontWeight="SemiBold" Margin="0,0,0,20" LetterSpacing="1"/>
+                                       FontSize="11" FontWeight="SemiBold" Margin="0,0,0,20"/>
 
                             <TextBlock x:Name="FilesFoundTxt" Text="Files found: 0"
                                        Foreground="{StaticResource TextPrimary}" FontSize="15" FontWeight="Medium"/>
@@ -782,7 +782,7 @@ Add-Type -AssemblyName System.Windows.Forms
                             BorderBrush="{StaticResource Border1}" BorderThickness="1">
                         <StackPanel>
                             <TextBlock Text="ACTIONS" Foreground="{StaticResource TextMuted}"
-                                       FontSize="10" FontWeight="SemiBold" Margin="0,0,0,16" LetterSpacing="1"/>
+                                       FontSize="10" FontWeight="SemiBold" Margin="0,0,0,16"/>
 
                             <Button x:Name="RestoreProjectBtn" Content="🔄  Restore Entire Project"
                                     Style="{StaticResource AccentBtn}" HorizontalAlignment="Stretch"
@@ -796,7 +796,7 @@ Add-Type -AssemblyName System.Windows.Forms
                             <Separator Background="{StaticResource Border1}" Margin="0,24,0,20" Height="1"/>
 
                             <TextBlock Text="SELECTED BACKUP" Foreground="{StaticResource TextMuted}"
-                                       FontSize="10" FontWeight="SemiBold" Margin="0,0,0,12" LetterSpacing="1"/>
+                                       FontSize="10" FontWeight="SemiBold" Margin="0,0,0,12"/>
                             <TextBlock x:Name="BackupDetailName" Text="—" Foreground="{StaticResource TextPrimary}"
                                        FontSize="14" FontWeight="Medium" TextWrapping="Wrap"/>
                             <TextBlock x:Name="BackupDetailDate" Text="" Foreground="{StaticResource TextSub}"
@@ -820,7 +820,7 @@ Add-Type -AssemblyName System.Windows.Forms
                             BorderBrush="{StaticResource Border1}" BorderThickness="1">
                         <StackPanel>
                             <TextBlock Text="BACKUP" Foreground="{StaticResource TextMuted}" FontSize="10"
-                                       FontWeight="SemiBold" Margin="0,0,0,16" LetterSpacing="1"/>
+                                       FontWeight="SemiBold" Margin="0,0,0,16"/>
                             <Grid Margin="0,0,0,16">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"/>
@@ -856,7 +856,7 @@ Add-Type -AssemblyName System.Windows.Forms
                             BorderBrush="{StaticResource Border1}" BorderThickness="1">
                         <StackPanel>
                             <TextBlock Text="REMOVAL BEHAVIOR" Foreground="{StaticResource TextMuted}" FontSize="10"
-                                       FontWeight="SemiBold" Margin="0,0,0,16" LetterSpacing="1"/>
+                                       FontWeight="SemiBold" Margin="0,0,0,16"/>
                             <Grid Margin="0,0,0,16">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"/>
@@ -898,7 +898,7 @@ Add-Type -AssemblyName System.Windows.Forms
                             BorderBrush="{StaticResource Border1}" BorderThickness="1">
                         <StackPanel>
                             <TextBlock Text="INTERFACE" Foreground="{StaticResource TextMuted}" FontSize="10"
-                                       FontWeight="SemiBold" Margin="0,0,0,16" LetterSpacing="1"/>
+                                       FontWeight="SemiBold" Margin="0,0,0,16"/>
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"/>
@@ -950,7 +950,7 @@ Add-Type -AssemblyName System.Windows.Forms
                             BorderBrush="{StaticResource Border1}" BorderThickness="1">
                         <StackPanel>
                             <TextBlock Text="WHAT'S NEW IN V2.0" Foreground="{StaticResource TextMuted}" FontSize="10"
-                                       FontWeight="SemiBold" Margin="0,0,0,16" LetterSpacing="1"/>
+                                       FontWeight="SemiBold" Margin="0,0,0,16"/>
                             <StackPanel>
                                 <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                                     <Border Background="#1E1433" Width="24" Height="24" CornerRadius="6" Margin="0,0,12,0">
@@ -1009,7 +1009,7 @@ Add-Type -AssemblyName System.Windows.Forms
                             BorderBrush="{StaticResource Border1}" BorderThickness="1">
                         <StackPanel>
                             <TextBlock Text="SUPPORTED LANGUAGES" Foreground="{StaticResource TextMuted}" FontSize="10"
-                                       FontWeight="SemiBold" Margin="0,0,0,14" LetterSpacing="1"/>
+                                       FontWeight="SemiBold" Margin="0,0,0,14"/>
                             <WrapPanel>
                                 <Border Background="#1A1A26" CornerRadius="6" Padding="10,5" Margin="0,0,8,8">
                                     <TextBlock Text="JavaScript" Foreground="{StaticResource AccentHover}" FontSize="12"/>
