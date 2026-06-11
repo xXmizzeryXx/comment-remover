@@ -414,6 +414,10 @@ Add-Type -AssemblyName System.Windows.Forms
 
     <!-- ROOT GRID -->
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="280"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
         <!-- Ambient backdrop -->
         <Grid Grid.ColumnSpan="2" IsHitTestVisible="False">
             <Ellipse Width="480" Height="480" Fill="#3F42FF26" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="-160,-180,0,0" Effect="{StaticResource SoftGlow}"/>
@@ -427,10 +431,6 @@ Add-Type -AssemblyName System.Windows.Forms
                 </Rectangle.Fill>
             </Rectangle>
         </Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="280"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
 
         <!-- ====================================================
              SIDEBAR
