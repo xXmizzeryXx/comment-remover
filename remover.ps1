@@ -12,10 +12,16 @@ Add-Type -AssemblyName System.Windows.Forms
         Height="860" Width="1320"
         MinHeight="720" MinWidth="1100"
         WindowStartupLocation="CenterScreen"
-        Background="{StaticResource HeroGradient}"
         ResizeMode="CanResizeWithGrip"
         WindowStyle="SingleBorderWindow"
         FontFamily="Poppins, Segoe UI">
+    <Window.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#1E2854" Offset="0"/>
+            <GradientStop Color="#131C38" Offset="0.45"/>
+            <GradientStop Color="#0B1022" Offset="1"/>
+        </LinearGradientBrush>
+    </Window.Background>
 
     <Window.Resources>
 
