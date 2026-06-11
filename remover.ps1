@@ -12,31 +12,76 @@ Add-Type -AssemblyName System.Windows.Forms
         Height="860" Width="1320"
         MinHeight="720" MinWidth="1100"
         WindowStartupLocation="CenterScreen"
-        Background="#0A0A0F"
+        Background="{StaticResource HeroGradient}"
         ResizeMode="CanResizeWithGrip"
         WindowStyle="SingleBorderWindow"
-        FontFamily="Segoe UI">
+        FontFamily="Poppins, Segoe UI">
 
     <Window.Resources>
 
-        <!-- ===== COLOR RESOURCES ===== -->
-        <SolidColorBrush x:Key="BgBase"       Color="#0A0A0F"/>
-        <SolidColorBrush x:Key="BgSurface"    Color="#12121A"/>
-        <SolidColorBrush x:Key="BgCard"       Color="#1A1A26"/>
-        <SolidColorBrush x:Key="BgCardHover"  Color="#1F1F2E"/>
-        <SolidColorBrush x:Key="BgInput"      Color="#0F0F18"/>
-        <SolidColorBrush x:Key="Accent"       Color="#8B5CF6"/>
-        <SolidColorBrush x:Key="AccentHover"  Color="#A78BFA"/>
-        <SolidColorBrush x:Key="AccentPress"  Color="#7C3AED"/>
-        <SolidColorBrush x:Key="AccentGlow"   Color="#6D28D9"/>
-        <SolidColorBrush x:Key="Success"      Color="#10B981"/>
-        <SolidColorBrush x:Key="Warning"      Color="#F59E0B"/>
-        <SolidColorBrush x:Key="Danger"       Color="#EF4444"/>
-        <SolidColorBrush x:Key="TextPrimary"  Color="#F1F0FF"/>
-        <SolidColorBrush x:Key="TextSub"      Color="#9CA3AF"/>
-        <SolidColorBrush x:Key="TextMuted"    Color="#4B5563"/>
-        <SolidColorBrush x:Key="Border1"      Color="#1E1E2E"/>
-        <SolidColorBrush x:Key="Border2"      Color="#2D2D42"/>
+        <!-- ===== COLOR & FX RESOURCES ===== -->
+        <SolidColorBrush x:Key="BgBase"       Color="#050510"/>
+        <SolidColorBrush x:Key="BgSurface"    Color="#0C1428"/>
+        <SolidColorBrush x:Key="BgCard"       Color="#111B33"/>
+        <SolidColorBrush x:Key="BgCardHover"  Color="#182646"/>
+        <SolidColorBrush x:Key="BgInput"      Color="#0E172E"/>
+        <SolidColorBrush x:Key="Accent"       Color="#7F5BFF"/>
+        <SolidColorBrush x:Key="AccentHover"  Color="#9B75FF"/>
+        <SolidColorBrush x:Key="AccentPress"  Color="#5A3FE2"/>
+        <SolidColorBrush x:Key="AccentGlow"   Color="#4030A8"/>
+        <SolidColorBrush x:Key="Success"      Color="#34E0A1"/>
+        <SolidColorBrush x:Key="Warning"      Color="#FFC85C"/>
+        <SolidColorBrush x:Key="Danger"       Color="#FF6B6B"/>
+        <SolidColorBrush x:Key="TextPrimary"  Color="#F6F8FF"/>
+        <SolidColorBrush x:Key="TextSub"      Color="#ADB9D8"/>
+        <SolidColorBrush x:Key="TextMuted"    Color="#5F6C8A"/>
+        <SolidColorBrush x:Key="Border1"      Color="#162042"/>
+        <SolidColorBrush x:Key="Border2"      Color="#1F2C54"/>
+        <LinearGradientBrush x:Key="AccentGradient" StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#7F5BFF" Offset="0"/>
+            <GradientStop Color="#5BD8FF" Offset="1"/>
+        </LinearGradientBrush>
+        <LinearGradientBrush x:Key="HeroGradient" StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#1E2854" Offset="0"/>
+            <GradientStop Color="#131C38" Offset="0.45"/>
+            <GradientStop Color="#0B1022" Offset="1"/>
+        </LinearGradientBrush>
+        <DropShadowEffect x:Key="CardGlow" BlurRadius="25" ShadowDepth="0" Color="#3C4A93" Opacity="0.6"/>
+        <DropShadowEffect x:Key="SoftGlow" BlurRadius="40" ShadowDepth="0" Color="#7F5BFF" Opacity="0.35"/>
+
+        <!-- ===== TYPOGRAPHY ===== -->
+        <Style x:Key="DisplayTitle" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="{StaticResource TextPrimary}"/>
+            <Setter Property="FontSize" Value="34"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Margin" Value="0,0,0,8"/>
+        </Style>
+
+        <Style x:Key="DisplaySubtitle" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="{StaticResource TextSub}"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Margin" Value="0,0,0,24"/>
+        </Style>
+
+        <!-- ===== CARD STYLES ===== -->
+        <Style x:Key="GlassCard" TargetType="Border">
+            <Setter Property="Background" Value="#141F3900"/>
+            <Setter Property="BorderBrush" Value="#5D78FF33"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="18"/>
+            <Setter Property="Padding" Value="24"/>
+        </Style>
+
+        <Style x:Key="ElevatedCard" TargetType="Border" BasedOn="{StaticResource GlassCard}">
+            <Setter Property="Background" Value="#162349BF"/>
+            <Setter Property="Effect" Value="{StaticResource CardGlow}"/>
+        </Style>
+
+        <Style x:Key="MetricCard" TargetType="Border" BasedOn="{StaticResource GlassCard}">
+            <Setter Property="Background" Value="#152240"/>
+            <Setter Property="Padding" Value="18"/>
+            <Setter Property="CornerRadius" Value="16"/>
+        </Style>
 
         <!-- ===== SCROLLBAR STYLE ===== -->
         <Style TargetType="ScrollBar">
@@ -75,18 +120,19 @@ Add-Type -AssemblyName System.Windows.Forms
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="FontSize" Value="14"/>
         </Style>
 
         <!-- ===== ACCENT BUTTON ===== -->
         <Style x:Key="AccentBtn" TargetType="Button" BasedOn="{StaticResource BtnBase}">
-            <Setter Property="Background" Value="{StaticResource Accent}"/>
-            <Setter Property="Padding" Value="20,10"/>
-            <Setter Property="FontSize" Value="14"/>
-            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Padding" Value="18,12"/>
+            <Setter Property="Background" Value="{StaticResource AccentGradient}"/>
+            <Setter Property="Effect" Value="{StaticResource SoftGlow}"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border x:Name="bd" Background="{TemplateBinding Background}" CornerRadius="10" Padding="{TemplateBinding Padding}">
+                        <Border x:Name="bd" Background="{TemplateBinding Background}" CornerRadius="14" Padding="{TemplateBinding Padding}">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                         <ControlTemplate.Triggers>
@@ -97,7 +143,7 @@ Add-Type -AssemblyName System.Windows.Forms
                                 <Setter TargetName="bd" Property="Background" Value="{StaticResource AccentPress}"/>
                             </Trigger>
                             <Trigger Property="IsEnabled" Value="False">
-                                <Setter TargetName="bd" Property="Background" Value="#2D2D42"/>
+                                <Setter TargetName="bd" Property="Opacity" Value="0.5"/>
                                 <Setter Property="Foreground" Value="{StaticResource TextMuted}"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
@@ -108,23 +154,24 @@ Add-Type -AssemblyName System.Windows.Forms
 
         <!-- ===== GHOST BUTTON ===== -->
         <Style x:Key="GhostBtn" TargetType="Button" BasedOn="{StaticResource BtnBase}">
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="Padding" Value="16,9"/>
-            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="Padding" Value="16,10"/>
+            <Setter Property="Background" Value="#203153"/>
+            <Setter Property="BorderBrush" Value="#2B3F6B"/>
+            <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border x:Name="bd" Background="{TemplateBinding Background}" CornerRadius="8"
-                                BorderBrush="{StaticResource Border2}" BorderThickness="1" Padding="{TemplateBinding Padding}">
+                        <Border x:Name="bd" Background="{TemplateBinding Background}" CornerRadius="12"
+                                BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="bd" Property="Background" Value="{StaticResource BgCard}"/>
+                                <Setter TargetName="bd" Property="Background" Value="#2A3E6A"/>
                                 <Setter TargetName="bd" Property="BorderBrush" Value="{StaticResource Accent}"/>
                             </Trigger>
                             <Trigger Property="IsPressed" Value="True">
-                                <Setter TargetName="bd" Property="Background" Value="{StaticResource BgCardHover}"/>
+                                <Setter TargetName="bd" Property="Background" Value="#1B294A"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -134,21 +181,25 @@ Add-Type -AssemblyName System.Windows.Forms
 
         <!-- ===== DANGER BUTTON ===== -->
         <Style x:Key="DangerBtn" TargetType="Button" BasedOn="{StaticResource BtnBase}">
-            <Setter Property="Background" Value="#3B1E1E"/>
-            <Setter Property="Foreground" Value="#FCA5A5"/>
-            <Setter Property="Padding" Value="14,8"/>
-            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="Padding" Value="16,11"/>
+            <Setter Property="Background" Value="#3B2030"/>
+            <Setter Property="BorderBrush" Value="#BE4B6A"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Foreground" Value="#FF9BB3"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border x:Name="bd" Background="{TemplateBinding Background}" CornerRadius="8"
-                                BorderBrush="#5C2626" BorderThickness="1" Padding="{TemplateBinding Padding}">
+                        <Border x:Name="bd" Background="{TemplateBinding Background}" CornerRadius="12"
+                                BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="bd" Property="Background" Value="#EF4444"/>
-                                <Setter Property="Foreground" Value="White"/>
+                                <Setter TargetName="bd" Property="Background" Value="#5A2742"/>
+                                <Setter TargetName="bd" Property="BorderBrush" Value="#FF6B8A"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="bd" Property="Background" Value="#2B1526"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -159,38 +210,37 @@ Add-Type -AssemblyName System.Windows.Forms
         <!-- ===== SIDEBAR NAV BUTTON ===== -->
         <Style x:Key="NavBtn" TargetType="Button" BasedOn="{StaticResource BtnBase}">
             <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="Foreground" Value="{StaticResource TextSub}"/>
+            <Setter Property="Foreground" Value="{StaticResource TextMuted}"/>
             <Setter Property="HorizontalAlignment" Value="Stretch"/>
             <Setter Property="HorizontalContentAlignment" Value="Left"/>
-            <Setter Property="Padding" Value="16,12"/>
-            <Setter Property="FontSize" Value="14"/>
-            <Setter Property="Margin" Value="8,2"/>
+            <Setter Property="Padding" Value="18,14"/>
+            <Setter Property="Margin" Value="4,4,4,0"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border x:Name="bd" Background="{TemplateBinding Background}" CornerRadius="10"
+                        <Border x:Name="bd" Background="{TemplateBinding Background}" CornerRadius="14"
                                 Padding="{TemplateBinding Padding}">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
-                                <Border x:Name="indicator" Grid.Column="0" Width="3" Height="20" CornerRadius="2"
-                                        Background="Transparent" Margin="0,0,10,0"/>
+                                <Border x:Name="indicator" Grid.Column="0" Width="6" CornerRadius="3"
+                                        Background="Transparent" Margin="0,0,12,0"/>
                                 <ContentPresenter Grid.Column="1" VerticalAlignment="Center"
                                                   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"/>
                             </Grid>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="bd" Property="Background" Value="#1A1A26"/>
+                                <Setter TargetName="bd" Property="Background" Value="#182646"/>
                                 <Setter Property="Foreground" Value="{StaticResource TextPrimary}"/>
+                                <Setter TargetName="indicator" Property="Background" Value="#3F5BD9"/>
                             </Trigger>
                             <Trigger Property="Tag" Value="active">
-                                <Setter TargetName="bd" Property="Background" Value="#1E1433"/>
-                                <Setter Property="Foreground" Value="{StaticResource AccentHover}"/>
-                                <Setter TargetName="indicator" Property="Background" Value="{StaticResource Accent}"/>
+                                <Setter TargetName="bd" Property="Background" Value="#212F56"/>
+                                <Setter Property="Foreground" Value="{StaticResource TextPrimary}"/>
+                                <Setter TargetName="indicator" Property="Background" Value="{StaticResource AccentGradient}"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -200,12 +250,12 @@ Add-Type -AssemblyName System.Windows.Forms
 
         <!-- ===== TEXTBOX ===== -->
         <Style TargetType="TextBox">
-            <Setter Property="Background" Value="{StaticResource BgInput}"/>
+            <Setter Property="Background" Value="#162956"/>
             <Setter Property="Foreground" Value="{StaticResource TextPrimary}"/>
-            <Setter Property="BorderBrush" Value="{StaticResource Border2}"/>
+            <Setter Property="BorderBrush" Value="#274173"/>
             <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="Padding" Value="12,0"/>
-            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="Padding" Value="14,0"/>
+            <Setter Property="FontSize" Value="14"/>
             <Setter Property="CaretBrush" Value="{StaticResource AccentHover}"/>
             <Setter Property="SelectionBrush" Value="{StaticResource Accent}"/>
             <Setter Property="Template">
@@ -214,12 +264,13 @@ Add-Type -AssemblyName System.Windows.Forms
                         <Border x:Name="bd" Background="{TemplateBinding Background}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="8" Padding="{TemplateBinding Padding}">
+                                CornerRadius="12" Padding="{TemplateBinding Padding}">
                             <ScrollViewer x:Name="PART_ContentHost" VerticalAlignment="Center"/>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsFocused" Value="True">
                                 <Setter TargetName="bd" Property="BorderBrush" Value="{StaticResource Accent}"/>
+                                <Setter TargetName="bd" Property="Background" Value="#1B3263"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -237,25 +288,23 @@ Add-Type -AssemblyName System.Windows.Forms
                 <Setter.Value>
                     <ControlTemplate TargetType="CheckBox">
                         <StackPanel Orientation="Horizontal">
-                            <Border x:Name="box" Width="18" Height="18" CornerRadius="5"
-                                    BorderBrush="{StaticResource Border2}" BorderThickness="1.5"
-                                    Background="{StaticResource BgInput}" Margin="0,0,10,0">
-                                <TextBlock x:Name="chk" Text="✓" FontSize="11" FontWeight="Bold"
-                                           Foreground="{StaticResource Accent}"
-                                           HorizontalAlignment="Center" VerticalAlignment="Center"
-                                           Visibility="Collapsed"/>
+                            <Border x:Name="box" Width="20" Height="20" CornerRadius="6"
+                                    BorderBrush="#2D4270" BorderThickness="1.4"
+                                    Background="#162956" Margin="0,0,10,0">
+                                <Path x:Name="chk" Data="M3 9 L7 13 L17 4" StrokeThickness="2.2" StrokeEndLineCap="Round" StrokeStartLineCap="Round" StrokeDashCap="Round"
+                                      Stroke="#5BD8FF" Stretch="Fill" Visibility="Collapsed"/>
                             </Border>
                             <ContentPresenter VerticalAlignment="Center"/>
                         </StackPanel>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsChecked" Value="True">
-                                <Setter TargetName="box" Property="Background" Value="#1E1433"/>
-                                <Setter TargetName="box" Property="BorderBrush" Value="{StaticResource Accent}"/>
+                                <Setter TargetName="box" Property="Background" Value="#1D2F5A"/>
+                                <Setter TargetName="box" Property="BorderBrush" Value="#5BD8FF"/>
                                 <Setter TargetName="chk" Property="Visibility" Value="Visible"/>
                                 <Setter Property="Foreground" Value="{StaticResource TextPrimary}"/>
                             </Trigger>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="box" Property="BorderBrush" Value="{StaticResource AccentHover}"/>
+                                <Setter TargetName="box" Property="BorderBrush" Value="{StaticResource Accent}"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -274,7 +323,7 @@ Add-Type -AssemblyName System.Windows.Forms
                                     <RepeatButton Command="Slider.DecreaseLarge">
                                         <RepeatButton.Template>
                                             <ControlTemplate TargetType="RepeatButton">
-                                                <Border Height="4" Background="{StaticResource Accent}" CornerRadius="2"/>
+                                                <Border Height="5" Background="{StaticResource AccentGradient}" CornerRadius="3"/>
                                             </ControlTemplate>
                                         </RepeatButton.Template>
                                     </RepeatButton>
@@ -283,7 +332,7 @@ Add-Type -AssemblyName System.Windows.Forms
                                     <RepeatButton Command="Slider.IncreaseLarge">
                                         <RepeatButton.Template>
                                             <ControlTemplate TargetType="RepeatButton">
-                                                <Border Height="4" Background="{StaticResource Border2}" CornerRadius="2"/>
+                                                <Border Height="5" Background="#1D2F57" CornerRadius="3"/>
                                             </ControlTemplate>
                                         </RepeatButton.Template>
                                     </RepeatButton>
@@ -292,7 +341,7 @@ Add-Type -AssemblyName System.Windows.Forms
                                     <Thumb>
                                         <Thumb.Template>
                                             <ControlTemplate TargetType="Thumb">
-                                                <Ellipse Width="16" Height="16" Fill="{StaticResource AccentHover}"/>
+                                                <Ellipse Width="18" Height="18" Fill="{StaticResource AccentHover}" Stroke="#2B3E6A" StrokeThickness="1"/>
                                             </ControlTemplate>
                                         </Thumb.Template>
                                     </Thumb>
@@ -306,21 +355,14 @@ Add-Type -AssemblyName System.Windows.Forms
 
         <!-- ===== PROGRESS BAR ===== -->
         <Style TargetType="ProgressBar">
-            <Setter Property="Height" Value="6"/>
-            <Setter Property="Background" Value="{StaticResource Border1}"/>
+            <Setter Property="Height" Value="8"/>
+            <Setter Property="Background" Value="#152544"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="ProgressBar">
-                        <Border Background="{TemplateBinding Background}" CornerRadius="3" Height="{TemplateBinding Height}">
-                            <Border x:Name="PART_Indicator" HorizontalAlignment="Left" CornerRadius="3">
-                                <Border.Background>
-                                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
-                                        <GradientStop Color="#7C3AED" Offset="0"/>
-                                        <GradientStop Color="#A78BFA" Offset="1"/>
-                                    </LinearGradientBrush>
-                                </Border.Background>
-                            </Border>
+                        <Border Background="{TemplateBinding Background}" CornerRadius="4" Height="{TemplateBinding Height}">
+                            <Border x:Name="PART_Indicator" HorizontalAlignment="Left" CornerRadius="4" Background="{StaticResource AccentGradient}"/>
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>
@@ -332,27 +374,29 @@ Add-Type -AssemblyName System.Windows.Forms
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Padding" Value="0"/>
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="ScrollViewer.CanContentScroll" Value="True"/>
         </Style>
         <Style TargetType="ListBoxItem">
             <Setter Property="Padding" Value="0"/>
-            <Setter Property="Margin" Value="0,3"/>
+            <Setter Property="Margin" Value="0,6"/>
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="ListBoxItem">
                         <Border x:Name="bd" Background="{TemplateBinding Background}"
-                                CornerRadius="10" Padding="14,12"
-                                BorderBrush="{StaticResource Border1}" BorderThickness="1">
-                            <ContentPresenter/>
+                                CornerRadius="16" Padding="18,16"
+                                BorderBrush="#203153" BorderThickness="1">
+                            <ContentPresenter Margin="0"/>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="bd" Property="Background" Value="{StaticResource BgCardHover}"/>
-                                <Setter TargetName="bd" Property="BorderBrush" Value="{StaticResource Border2}"/>
+                                <Setter TargetName="bd" Property="Background" Value="#1A2A51"/>
+                                <Setter TargetName="bd" Property="BorderBrush" Value="{StaticResource Accent}"/>
                             </Trigger>
                             <Trigger Property="IsSelected" Value="True">
-                                <Setter TargetName="bd" Property="Background" Value="#1E1433"/>
-                                <Setter TargetName="bd" Property="BorderBrush" Value="{StaticResource Accent}"/>
+                                <Setter TargetName="bd" Property="Background" Value="#202F5D"/>
+                                <Setter TargetName="bd" Property="BorderBrush" Value="{StaticResource AccentGradient}"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -364,41 +408,48 @@ Add-Type -AssemblyName System.Windows.Forms
 
     <!-- ROOT GRID -->
     <Grid>
+        <!-- Ambient backdrop -->
+        <Grid Grid.ColumnSpan="2" IsHitTestVisible="False">
+            <Ellipse Width="480" Height="480" Fill="#3F42FF26" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="-160,-180,0,0" Effect="{StaticResource SoftGlow}"/>
+            <Ellipse Width="380" Height="380" Fill="#2BC5FF1F" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,-140,-120" Effect="{StaticResource SoftGlow}"/>
+            <Rectangle Height="320" VerticalAlignment="Top" Margin="260,140,260,0" RadiusX="160" RadiusY="160">
+                <Rectangle.Fill>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="#1E2D5F" Offset="0"/>
+                        <GradientStop Color="#101730" Offset="1"/>
+                    </LinearGradientBrush>
+                </Rectangle.Fill>
+            </Rectangle>
+        </Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="240"/>
+            <ColumnDefinition Width="280"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
         <!-- ====================================================
              SIDEBAR
              ==================================================== -->
-        <Border Grid.Column="0" Background="{StaticResource BgSurface}"
-                BorderBrush="{StaticResource Border1}" BorderThickness="0,0,1,0">
+        <Border Grid.Column="0" Style="{StaticResource ElevatedCard}" Margin="36" Padding="32,36">
             <DockPanel>
 
                 <!-- Logo -->
-                <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="20,24,20,28">
-                    <Border Width="44" Height="44" CornerRadius="12">
-                        <Border.Background>
-                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                                <GradientStop Color="#7C3AED" Offset="0"/>
-                                <GradientStop Color="#A78BFA" Offset="1"/>
-                            </LinearGradientBrush>
-                        </Border.Background>
-                        <TextBlock Text="CC" FontSize="18" FontWeight="Bold" Foreground="White"
+                <StackPanel DockPanel.Dock="Top" Margin="8,0,8,32">
+                    <Border Width="64" Height="64" CornerRadius="20" Background="{StaticResource AccentGradient}" Effect="{StaticResource SoftGlow}" HorizontalAlignment="Left">
+                        <TextBlock Text="CC" FontSize="26" FontWeight="Bold" Foreground="White"
                                    HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Border>
-                    <StackPanel Margin="14,0,0,0" VerticalAlignment="Center">
-                        <TextBlock Text="CC Remover" Foreground="{StaticResource TextPrimary}"
-                                   FontSize="16" FontWeight="SemiBold"/>
-                        <TextBlock Text="v2.0 by Mizzery" Foreground="{StaticResource TextMuted}" FontSize="11"/>
+                    <StackPanel Margin="0,20,0,0">
+                        <TextBlock Text="Comment Cleaner" Foreground="{StaticResource TextPrimary}" FontSize="22" FontWeight="SemiBold"/>
+                        <TextBlock Text="Reactbits-inspired PowerShell UI" Foreground="{StaticResource TextMuted}" FontSize="12" Margin="0,4,0,0"/>
                     </StackPanel>
                 </StackPanel>
 
                 <!-- Nav Label -->
-                <TextBlock DockPanel.Dock="Top" Text="NAVIGATION"
-                           Foreground="{StaticResource TextMuted}" FontSize="10" FontWeight="SemiBold"
-                           Margin="26,0,0,8"/>
+                <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0,0,0,12">
+                    <TextBlock Text="PAGES" Foreground="{StaticResource TextMuted}" FontSize="11" FontWeight="SemiBold" LetterSpacing="0.4"/>
+                    <Rectangle Width="1" Height="12" Fill="#2A3F68" Margin="12,0,12,0"/>
+                    <TextBlock Text="Explore & manage" Foreground="{StaticResource TextSub}" FontSize="11"/>
+                </StackPanel>
 
                 <!-- Nav Buttons -->
                 <StackPanel DockPanel.Dock="Top">
@@ -410,35 +461,24 @@ Add-Type -AssemblyName System.Windows.Forms
                 </StackPanel>
 
                 <!-- Bottom Stats Box -->
-                <StackPanel DockPanel.Dock="Bottom" Margin="14,0,14,20">
-                    <Border Background="{StaticResource BgCard}" CornerRadius="12" Padding="14,14">
+                <StackPanel DockPanel.Dock="Bottom" Margin="0,0,0,12">
+                    <Border Style="{StaticResource GlassCard}">
                         <StackPanel>
-                            <TextBlock Text="SESSION STATS" Foreground="{StaticResource TextMuted}"
-                                       FontSize="10" FontWeight="SemiBold" Margin="0,0,0,10"/>
-                            <Grid Margin="0,0,0,6">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Text="Files scanned" Foreground="{StaticResource TextSub}" FontSize="12"/>
-                                <TextBlock x:Name="SBFiles" Grid.Column="1" Text="0" Foreground="{StaticResource AccentHover}" FontSize="12" FontWeight="SemiBold"/>
-                            </Grid>
-                            <Grid Margin="0,0,0,6">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Text="Comments out" Foreground="{StaticResource TextSub}" FontSize="12"/>
-                                <TextBlock x:Name="SBComments" Grid.Column="1" Text="0" Foreground="{StaticResource Success}" FontSize="12" FontWeight="SemiBold"/>
-                            </Grid>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Text="Size saved" Foreground="{StaticResource TextSub}" FontSize="12"/>
-                                <TextBlock x:Name="SBSize" Grid.Column="1" Text="0 KB" Foreground="{StaticResource TextSub}" FontSize="12"/>
-                            </Grid>
+                            <TextBlock Text="Today’s session" Foreground="{StaticResource TextSub}" FontSize="11" FontWeight="SemiBold" Margin="0,0,0,14"/>
+                            <UniformGrid Columns="1" Rows="3" Margin="0">
+                                <StackPanel Margin="0,4">
+                                    <TextBlock Text="Files scanned" Foreground="{StaticResource TextMuted}" FontSize="11"/>
+                                    <TextBlock x:Name="SBFiles" Text="0" Foreground="{StaticResource TextPrimary}" FontSize="20" FontWeight="SemiBold"/>
+                                </StackPanel>
+                                <StackPanel Margin="0,10">
+                                    <TextBlock Text="Comments removed" Foreground="{StaticResource TextMuted}" FontSize="11"/>
+                                    <TextBlock x:Name="SBComments" Text="0" Foreground="{StaticResource Success}" FontSize="20" FontWeight="SemiBold"/>
+                                </StackPanel>
+                                <StackPanel Margin="0,4">
+                                    <TextBlock Text="Space saved" Foreground="{StaticResource TextMuted}" FontSize="11"/>
+                                    <TextBlock x:Name="SBSize" Text="0 KB" Foreground="{StaticResource TextPrimary}" FontSize="18" FontWeight="Medium"/>
+                                </StackPanel>
+                            </UniformGrid>
                         </StackPanel>
                     </Border>
                 </StackPanel>
@@ -449,293 +489,262 @@ Add-Type -AssemblyName System.Windows.Forms
         <!-- ====================================================
              MAIN CONTENT AREA
              ==================================================== -->
-        <Grid Grid.Column="1" Background="{StaticResource BgBase}">
+        <Grid Grid.Column="1" Margin="0,36,36,36">
 
             <!-- Toast Notification -->
             <Border x:Name="ToastPanel"
                     HorizontalAlignment="Right" VerticalAlignment="Top"
-                    Margin="0,20,24,0" Padding="18,12" CornerRadius="10"
-                    Background="#1E1433" BorderBrush="{StaticResource Accent}" BorderThickness="1"
-                    Visibility="Collapsed" Panel.ZIndex="99" MaxWidth="380">
+                    Margin="0,0,0,0" Padding="22,16" CornerRadius="14"
+                    Background="#1E2E58F0" BorderBrush="#3F57FF66" BorderThickness="1"
+                    Visibility="Collapsed" Panel.ZIndex="99" MaxWidth="420">
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock x:Name="ToastIcon" FontSize="16" VerticalAlignment="Center" Margin="0,0,10,0"/>
-                    <TextBlock x:Name="ToastText" Foreground="{StaticResource TextPrimary}" FontSize="13"
-                               TextWrapping="Wrap" VerticalAlignment="Center"/>
+                    <TextBlock x:Name="ToastIcon" FontSize="18" VerticalAlignment="Center"/>
+                    <TextBlock x:Name="ToastText" Foreground="{StaticResource TextPrimary}" FontSize="14"
+                               TextWrapping="Wrap" VerticalAlignment="Center" Margin="12,0,0,0"/>
                 </StackPanel>
             </Border>
 
             <!-- ============ PAGE: HOME ============ -->
             <ScrollViewer x:Name="PageHome" VerticalScrollBarVisibility="Auto">
-                <StackPanel Margin="36,32,36,36">
+                <StackPanel Margin="12,0,12,36">
 
-                    <TextBlock Text="Welcome back" Foreground="{StaticResource TextSub}" FontSize="14"/>
-                    <TextBlock Text="Dashboard" Foreground="{StaticResource TextPrimary}" FontSize="32" FontWeight="Bold" Margin="0,2,0,28"/>
-
-                    <!-- Stat Cards Row -->
-                    <Grid Margin="0,0,0,28">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="16"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="16"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <!-- Card 1 -->
-                        <Border Grid.Column="0" Background="{StaticResource BgCard}" CornerRadius="16" Padding="22,20"
-                                BorderBrush="{StaticResource Border1}" BorderThickness="1">
+                    <!-- Hero Panel -->
+                    <Border Style="{StaticResource ElevatedCard}" Padding="40" Background="#182B58E0" Margin="0,0,0,28">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="1.4*"/>
+                            </Grid.ColumnDefinitions>
                             <StackPanel>
-                                <Border Width="38" Height="38" CornerRadius="10" HorizontalAlignment="Left" Margin="0,0,0,14">
-                                    <Border.Background><LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                                        <GradientStop Color="#7C3AED" Offset="0"/>
-                                        <GradientStop Color="#A78BFA" Offset="1"/>
-                                    </LinearGradientBrush></Border.Background>
-                                    <TextBlock Text="📁" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                </Border>
-                                <TextBlock x:Name="HomeFilesVal" Text="0" Foreground="{StaticResource TextPrimary}" FontSize="30" FontWeight="Bold"/>
-                                <TextBlock Text="Files Processed" Foreground="{StaticResource TextSub}" FontSize="13" Margin="0,4,0,0"/>
-                            </StackPanel>
-                        </Border>
+                                <TextBlock Text="Welcome back" Foreground="{StaticResource TextSub}" FontSize="15"/>
+                                <TextBlock Text="Your comment-free workflow" Style="{StaticResource DisplayTitle}" FontSize="40"/>
+                                <TextBlock Text="Scan, preview, and restore your codebases with a single tap." Style="{StaticResource DisplaySubtitle}" Margin="0,6,0,30"/>
 
-                        <!-- Card 2 -->
-                        <Border Grid.Column="2" Background="{StaticResource BgCard}" CornerRadius="16" Padding="22,20"
-                                BorderBrush="{StaticResource Border1}" BorderThickness="1">
-                            <StackPanel>
-                                <Border Width="38" Height="38" CornerRadius="10" HorizontalAlignment="Left" Margin="0,0,0,14">
-                                    <Border.Background><LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                                        <GradientStop Color="#059669" Offset="0"/>
-                                        <GradientStop Color="#34D399" Offset="1"/>
-                                    </LinearGradientBrush></Border.Background>
-                                    <TextBlock Text="✂️" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                </Border>
-                                <TextBlock x:Name="HomeCommentsVal" Text="0" Foreground="{StaticResource TextPrimary}" FontSize="30" FontWeight="Bold"/>
-                                <TextBlock Text="Comments Removed" Foreground="{StaticResource TextSub}" FontSize="13" Margin="0,4,0,0"/>
+                                <StackPanel Orientation="Horizontal">
+                                    <StackPanel.Resources>
+                                        <Thickness x:Key="ActionSpacing">12,0,0,0</Thickness>
+                                    </StackPanel.Resources>
+                                    <Button x:Name="QAScanBtn" Content="🚀  Start new scan" Style="{StaticResource AccentBtn}" MinWidth="180"/>
+                                    <Button x:Name="QABackupBtn" Content="📦  View backups" Style="{StaticResource GhostBtn}" MinWidth="150" Margin="{StaticResource ActionSpacing}"/>
+                                    <Button x:Name="QASettingsBtn" Content="⚙️  Settings" Style="{StaticResource GhostBtn}" MinWidth="140" Margin="{StaticResource ActionSpacing}"/>
+                                </StackPanel>
                             </StackPanel>
-                        </Border>
 
-                        <!-- Card 3 -->
-                        <Border Grid.Column="4" Background="{StaticResource BgCard}" CornerRadius="16" Padding="22,20"
-                                BorderBrush="{StaticResource Border1}" BorderThickness="1">
-                            <StackPanel>
-                                <Border Width="38" Height="38" CornerRadius="10" HorizontalAlignment="Left" Margin="0,0,0,14">
-                                    <Border.Background><LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                                        <GradientStop Color="#D97706" Offset="0"/>
-                                        <GradientStop Color="#FCD34D" Offset="1"/>
-                                    </LinearGradientBrush></Border.Background>
-                                    <TextBlock Text="💾" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <StackPanel Grid.Column="1" Margin="32,0,0,0">
+                                <TextBlock Text="Snapshot" Foreground="{StaticResource TextSub}" FontSize="12" Margin="0,0,0,14"/>
+                                <UniformGrid Columns="3" Rows="1">
+                                    <Border Style="{StaticResource MetricCard}" Margin="0,0,14,0">
+                                        <StackPanel>
+                                            <TextBlock Text="Files processed" Foreground="{StaticResource TextMuted}" FontSize="12"/>
+                                            <TextBlock x:Name="HomeFilesVal" Text="0" Foreground="{StaticResource TextPrimary}" FontSize="30" FontWeight="Bold" Margin="0,6,0,0"/>
+                                        </StackPanel>
+                                    </Border>
+                                    <Border Style="{StaticResource MetricCard}" Margin="14,0,14,0">
+                                        <StackPanel>
+                                            <TextBlock Text="Comments removed" Foreground="{StaticResource TextMuted}" FontSize="12"/>
+                                            <TextBlock x:Name="HomeCommentsVal" Text="0" Foreground="{StaticResource Success}" FontSize="30" FontWeight="Bold" Margin="0,6,0,0"/>
+                                        </StackPanel>
+                                    </Border>
+                                    <Border Style="{StaticResource MetricCard}" Margin="14,0,0,0">
+                                        <StackPanel>
+                                            <TextBlock Text="Storage saved" Foreground="{StaticResource TextMuted}" FontSize="12"/>
+                                            <TextBlock x:Name="HomeSizeVal" Text="0 KB" Foreground="{StaticResource TextPrimary}" FontSize="28" FontWeight="Bold" Margin="0,6,0,0"/>
+                                        </StackPanel>
+                                    </Border>
+                                </UniformGrid>
+                                <Border Background="#22376A" CornerRadius="12" Padding="18" Margin="0,26,0,0">
+                                    <StackPanel>
+                                        <TextBlock Text="Last scan" Foreground="{StaticResource TextMuted}" FontSize="12"/>
+                                        <TextBlock x:Name="HomeLastFolder" Text="No folder scanned yet" Foreground="{StaticResource TextPrimary}" FontSize="14" Margin="0,6,0,0" TextWrapping="Wrap"/>
+                                        <TextBlock x:Name="HomeLastTime" Text="" Foreground="{StaticResource TextSub}" FontSize="12"/>
+                                    </StackPanel>
                                 </Border>
-                                <TextBlock x:Name="HomeSizeVal" Text="0 KB" Foreground="{StaticResource TextPrimary}" FontSize="30" FontWeight="Bold"/>
-                                <TextBlock Text="Storage Saved" Foreground="{StaticResource TextSub}" FontSize="13" Margin="0,4,0,0"/>
                             </StackPanel>
-                        </Border>
-                    </Grid>
+                        </Grid>
+                    </Border>
 
-                    <!-- Recent Activity + Quick Actions -->
+                    <!-- Recent Activity + Insights -->
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="20"/>
-                            <ColumnDefinition Width="300"/>
+                            <ColumnDefinition Width="28"/>
+                            <ColumnDefinition Width="320"/>
                         </Grid.ColumnDefinitions>
 
                         <!-- Recent Activity -->
-                        <Border Grid.Column="0" Background="{StaticResource BgCard}" CornerRadius="16" Padding="22,20"
-                                BorderBrush="{StaticResource Border1}" BorderThickness="1">
+                        <Border Grid.Column="0" Style="{StaticResource GlassCard}" Padding="26" Background="#122045DD">
                             <StackPanel>
-                                <StackPanel Orientation="Horizontal" Margin="0,0,0,16">
-                                    <TextBlock Text="Recent Activity" Foreground="{StaticResource TextPrimary}" FontSize="16" FontWeight="SemiBold"/>
+                                <StackPanel Orientation="Horizontal" Margin="0,0,0,18">
+                                    <TextBlock Text="Activity timeline" Foreground="{StaticResource TextPrimary}" FontSize="18" FontWeight="SemiBold"/>
+                                    <Rectangle Width="8" Height="8" Fill="{StaticResource AccentGradient}" RadiusX="4" RadiusY="4" VerticalAlignment="Center"/>
+                                    <TextBlock Text="Latest 8 scans" Foreground="{StaticResource TextSub}" FontSize="12" VerticalAlignment="Center"/>
                                 </StackPanel>
                                 <ListBox x:Name="RecentList" Background="Transparent" BorderThickness="0"/>
                                 <TextBlock x:Name="RecentEmpty" Text="No scans yet. Head to Scan Files to get started."
                                            Foreground="{StaticResource TextMuted}" FontSize="13"
-                                           HorizontalAlignment="Center" Margin="0,20,0,0" TextWrapping="Wrap"/>
+                                           HorizontalAlignment="Center" Margin="0,24,0,0" TextWrapping="Wrap"/>
                             </StackPanel>
                         </Border>
 
-                        <!-- Quick Actions -->
-                        <Border Grid.Column="2" Background="{StaticResource BgCard}" CornerRadius="16" Padding="22,20"
-                                BorderBrush="{StaticResource Border1}" BorderThickness="1">
-                            <StackPanel>
-                                <TextBlock Text="Quick Actions" Foreground="{StaticResource TextPrimary}" FontSize="16" FontWeight="SemiBold" Margin="0,0,0,16"/>
+                        <!-- Insights -->
+                        <StackPanel Grid.Column="2">
+                            <StackPanel.Resources>
+                                <Thickness x:Key="InsightSpacing">0,20,0,0</Thickness>
+                            </StackPanel.Resources>
+                            <Border Style="{StaticResource GlassCard}" Padding="22" Background="#10203FDD">
+                                <StackPanel>
+                                    <TextBlock Text="Session health" Foreground="{StaticResource TextPrimary}" FontSize="16" FontWeight="SemiBold" Margin="0,0,0,10"/>
+                                    <StackPanel Orientation="Horizontal" Margin="0,6,0,0">
+                                        <Border Background="#1E315F" CornerRadius="14" Padding="14" Width="120">
+                                            <StackPanel>
+                                                <TextBlock Text="Files" Foreground="{StaticResource TextMuted}" FontSize="11"/>
+                                                <TextBlock Text="↺ Live" Foreground="{StaticResource Accent}" FontSize="13" FontWeight="SemiBold" Margin="0,6,0,0"/>
+                                                <TextBlock Text="Auto-refresh" Foreground="{StaticResource TextSub}" FontSize="11"/>
+                                            </StackPanel>
+                                        </Border>
+                                        <StackPanel Margin="16,0,0,0">
+                                            <TextBlock Text="Tip" Foreground="{StaticResource TextSub}" FontSize="12"/>
+                                            <TextBlock Text="Run a preview to inspect removals before committing changes."
+                                                       Foreground="{StaticResource TextPrimary}" FontSize="13" TextWrapping="Wrap" Margin="0,4,0,0"/>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Border>
 
-                                <Button x:Name="QAScanBtn" Content="🚀  Start New Scan" Style="{StaticResource AccentBtn}"
-                                        HorizontalAlignment="Stretch" Height="46" FontSize="14" Margin="0,0,0,10"/>
-                                <Button x:Name="QABackupBtn" Content="📦  View Backups" Style="{StaticResource GhostBtn}"
-                                        HorizontalAlignment="Stretch" Height="42" Margin="0,0,0,8"/>
-                                <Button x:Name="QASettingsBtn" Content="⚙️  Settings" Style="{StaticResource GhostBtn}"
-                                        HorizontalAlignment="Stretch" Height="42"/>
-
-                                <Separator Background="{StaticResource Border1}" Margin="0,20,0,16" Height="1"/>
-
-                                <TextBlock Text="Last Scan" Foreground="{StaticResource TextMuted}" FontSize="11" FontWeight="SemiBold" Margin="0,0,0,8"/>
-                                <TextBlock x:Name="HomeLastFolder" Text="No folder scanned yet" Foreground="{StaticResource TextSub}" FontSize="12" TextWrapping="Wrap"/>
-                                <TextBlock x:Name="HomeLastTime" Text="" Foreground="{StaticResource TextMuted}" FontSize="11" Margin="0,4,0,0"/>
-                            </StackPanel>
-                        </Border>
+                            <Border Style="{StaticResource GlassCard}" Padding="22" Background="#10203FDD" Margin="{StaticResource InsightSpacing}">
+                                <StackPanel>
+                                    <TextBlock Text="Helpful shortcuts" Foreground="{StaticResource TextPrimary}" FontSize="16" FontWeight="SemiBold" Margin="0,0,0,14"/>
+                                    <StackPanel>
+                                        <TextBlock Text="• Drag & drop any folder to load it instantly." Foreground="{StaticResource TextSub}" FontSize="12"/>
+                                        <TextBlock Text="• Toggle inline-only mode from Settings to preserve multi-line docs." Foreground="{StaticResource TextSub}" FontSize="12" Margin="0,10,0,0"/>
+                                        <TextBlock Text="• Backups are stored alongside your project inside CC_Backups_*." Foreground="{StaticResource TextSub}" FontSize="12" Margin="0,10,0,0"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Border>
+                        </StackPanel>
                     </Grid>
                 </StackPanel>
             </ScrollViewer>
 
             <!-- ============ PAGE: SCAN ============ -->
-            <Grid x:Name="PageScan" Visibility="Collapsed" Margin="36,32,36,0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
+            <ScrollViewer x:Name="PageScan" Visibility="Collapsed" VerticalScrollBarVisibility="Auto">
+                <StackPanel Margin="12,0,12,36">
 
-                <!-- Page Header -->
-                <StackPanel Grid.Row="0" Margin="0,0,0,24">
-                    <TextBlock Text="Scan &amp; Remove" Foreground="{StaticResource TextPrimary}" FontSize="32" FontWeight="Bold"/>
-                    <TextBlock Text="Strip comments from source files safely • Automatic backups included"
-                               Foreground="{StaticResource TextSub}" FontSize="14"/>
-                </StackPanel>
+                    <StackPanel>
+                        <TextBlock Text="Scan &amp; remove" Style="{StaticResource DisplayTitle}" FontSize="38"/>
+                        <TextBlock Text="Strip comments from your project with safety nets, analytics, and backups." Style="{StaticResource DisplaySubtitle}"/>
+                    </StackPanel>
 
-                <!-- Folder + Options Row -->
-                <Border Grid.Row="1" Background="{StaticResource BgCard}" CornerRadius="16" Padding="24,20"
-                        BorderBrush="{StaticResource Border1}" BorderThickness="1" Margin="0,0,0,20">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-
-                        <!-- Folder Row -->
-                        <Grid Grid.Row="0" Margin="0,0,0,18">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-                            <TextBox x:Name="FolderBox" Height="44" FontSize="13" VerticalContentAlignment="Center"
-                                     Background="{StaticResource BgInput}"/>
-                            <Button x:Name="BrowseBtn" Grid.Column="1" Content="Browse Folder"
-                                    Style="{StaticResource AccentBtn}" Height="44" Margin="12,0,0,0" Padding="18,0"/>
-                        </Grid>
-
-                        <!-- File Type Checkboxes -->
-                        <StackPanel Grid.Row="1" Margin="0,0,0,16">
-                            <TextBlock Text="FILE TYPES" Foreground="{StaticResource TextMuted}" FontSize="10" FontWeight="SemiBold"
-                                       Margin="0,0,0,10"/>
-                            <WrapPanel>
-                                <CheckBox x:Name="ChkJS"  Content="JS / TS" IsChecked="True" Margin="0,0,20,6"/>
-                                <CheckBox x:Name="ChkJSX" Content="JSX / TSX" IsChecked="True" Margin="0,0,20,6"/>
-                                <CheckBox x:Name="ChkCSS" Content="CSS / SCSS" IsChecked="True" Margin="0,0,20,6"/>
-                                <CheckBox x:Name="ChkHTML" Content="HTML / HTM" IsChecked="True" Margin="0,0,20,6"/>
-                                <CheckBox x:Name="ChkJava" Content="Java" IsChecked="True" Margin="0,0,20,6"/>
-                                <CheckBox x:Name="ChkCS" Content="C#" IsChecked="True" Margin="0,0,20,6"/>
-                                <CheckBox x:Name="ChkCpp" Content="C / C++" IsChecked="True" Margin="0,0,20,6"/>
-                                <CheckBox x:Name="ChkPHP" Content="PHP" IsChecked="True" Margin="0,0,20,6"/>
-                                <CheckBox x:Name="ChkPy" Content="Python" IsChecked="True" Margin="0,0,20,6"/>
-                                <CheckBox x:Name="ChkGo" Content="Go" IsChecked="True" Margin="0,0,20,6"/>
-                                <CheckBox x:Name="ChkRust" Content="Rust" IsChecked="True" Margin="0,0,20,6"/>
-                                <CheckBox x:Name="ChkSwift" Content="Swift" IsChecked="True" Margin="0,0,0,6"/>
-                            </WrapPanel>
-                        </StackPanel>
-
-                        <!-- Action Buttons -->
-                        <WrapPanel Grid.Row="2">
-                            <Button x:Name="RunBtn" Content="🚀  Remove Comments" Style="{StaticResource AccentBtn}"
-                                    Height="48" Width="220" FontSize="15" FontWeight="SemiBold"/>
-                            <Button x:Name="PreviewBtn" Content="👁  Preview Changes" Style="{StaticResource GhostBtn}"
-                                    Height="48" Width="180" Margin="12,0,0,0"/>
-                            <Button x:Name="ClearLogBtn" Content="Clear Log" Style="{StaticResource GhostBtn}"
-                                    Height="48" Margin="12,0,0,0"/>
-                        </WrapPanel>
-                    </Grid>
-                </Border>
-
-                <!-- Log + Progress Panel -->
-                <Grid Grid.Row="2">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="3*"/>
-                        <ColumnDefinition Width="18"/>
-                        <ColumnDefinition Width="2*"/>
-                    </Grid.ColumnDefinitions>
-
-                    <!-- Log -->
-                    <Border Grid.Column="0" Background="{StaticResource BgSurface}" CornerRadius="16"
-                            BorderBrush="{StaticResource Border1}" BorderThickness="1">
-                        <DockPanel Margin="6">
-                            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="16,12,16,8">
-                                <TextBlock Text="Operation Log" Foreground="{StaticResource TextPrimary}"
-                                           FontSize="14" FontWeight="SemiBold"/>
-                                <Border x:Name="ScanningBadge" Background="#1E1433" CornerRadius="6" Padding="8,3"
-                                        Margin="12,0,0,0" Visibility="Collapsed">
-                                    <TextBlock Text="● SCANNING" Foreground="{StaticResource Accent}"
-                                               FontSize="11" FontWeight="SemiBold"/>
-                                </Border>
-                            </StackPanel>
-                            <ScrollViewer VerticalScrollBarVisibility="Auto">
-                                <RichTextBox x:Name="LogBox" Background="Transparent" BorderThickness="0"
-                                             Padding="16,6,16,16" FontFamily="Cascadia Code, Consolas"
-                                             FontSize="12" Foreground="#C4C0E0" IsReadOnly="True"/>
-                            </ScrollViewer>
-                        </DockPanel>
-                    </Border>
-
-                    <!-- Stats Panel -->
-                    <Border Grid.Column="2" Background="{StaticResource BgCard}" CornerRadius="16" Padding="22,22"
-                            BorderBrush="{StaticResource Border1}" BorderThickness="1">
+                    <Border Style="{StaticResource ElevatedCard}" Padding="32" Background="#13254BE6" Margin="0,28,0,28">
                         <StackPanel>
-                            <TextBlock Text="LIVE PROGRESS" Foreground="{StaticResource Accent}"
-                                       FontSize="11" FontWeight="SemiBold" Margin="0,0,0,20"/>
 
-                            <TextBlock x:Name="FilesFoundTxt" Text="Files found: 0"
-                                       Foreground="{StaticResource TextPrimary}" FontSize="15" FontWeight="Medium"/>
-
-                            <ProgressBar x:Name="ProgressBar" Margin="0,12,0,4"/>
-
-                            <Grid Margin="0,0,0,24">
+                            <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock x:Name="FilesProcessedTxt" Text="0 / 0 files"
-                                           Foreground="{StaticResource TextSub}" FontSize="12"/>
-                                <TextBlock x:Name="ProgressPctTxt" Grid.Column="1"
-                                           Text="0%" Foreground="{StaticResource Accent}" FontSize="12" FontWeight="Bold"/>
+                                <TextBox x:Name="FolderBox" Height="48" FontSize="14" VerticalContentAlignment="Center"/>
+                                <Button x:Name="BrowseBtn" Grid.Column="1" Content="Browse folder" Style="{StaticResource AccentBtn}" Height="48" Margin="16,0,0,0" MinWidth="160"/>
                             </Grid>
 
-                            <!-- Metric Cards -->
-                            <Border Background="{StaticResource BgSurface}" CornerRadius="12" Padding="16" Margin="0,0,0,10">
-                                <StackPanel>
-                                    <TextBlock Text="Comments removed" Foreground="{StaticResource TextSub}" FontSize="12"/>
-                                    <TextBlock x:Name="CommentsRemovedTxt" Text="0"
-                                               Foreground="{StaticResource Success}" FontSize="26" FontWeight="Bold" Margin="0,4,0,0"/>
-                                </StackPanel>
-                            </Border>
+                            <StackPanel Margin="0,24,0,0">
+                                <TextBlock Text="Filetypes in scope" Foreground="{StaticResource TextSub}" FontSize="13" Margin="0,0,0,12"/>
+                                <WrapPanel ItemHeight="30" ItemWidth="110">
+                                    <CheckBox x:Name="ChkJS"  Content="JS / TS" IsChecked="True" Margin="0,0,18,8"/>
+                                    <CheckBox x:Name="ChkJSX" Content="JSX / TSX" IsChecked="True" Margin="0,0,18,8"/>
+                                    <CheckBox x:Name="ChkCSS" Content="CSS / SCSS" IsChecked="True" Margin="0,0,18,8"/>
+                                    <CheckBox x:Name="ChkHTML" Content="HTML / HTM" IsChecked="True" Margin="0,0,18,8"/>
+                                    <CheckBox x:Name="ChkJava" Content="Java" IsChecked="True" Margin="0,0,18,8"/>
+                                    <CheckBox x:Name="ChkCS" Content="C#" IsChecked="True" Margin="0,0,18,8"/>
+                                    <CheckBox x:Name="ChkCpp" Content="C / C++" IsChecked="True" Margin="0,0,18,8"/>
+                                    <CheckBox x:Name="ChkPHP" Content="PHP" IsChecked="True" Margin="0,0,18,8"/>
+                                    <CheckBox x:Name="ChkPy" Content="Python" IsChecked="True" Margin="0,0,18,8"/>
+                                    <CheckBox x:Name="ChkGo" Content="Go" IsChecked="True" Margin="0,0,18,8"/>
+                                    <CheckBox x:Name="ChkRust" Content="Rust" IsChecked="True" Margin="0,0,18,8"/>
+                                    <CheckBox x:Name="ChkSwift" Content="Swift" IsChecked="True" Margin="0,0,0,8"/>
+                                </WrapPanel>
+                            </StackPanel>
 
-                            <Border Background="{StaticResource BgSurface}" CornerRadius="12" Padding="16" Margin="0,0,0,10">
-                                <StackPanel>
-                                    <TextBlock Text="Space freed" Foreground="{StaticResource TextSub}" FontSize="12"/>
-                                    <TextBlock x:Name="SizeSavedTxt" Text="0 KB"
-                                               Foreground="{StaticResource TextPrimary}" FontSize="22" FontWeight="Bold" Margin="0,4,0,0"/>
-                                </StackPanel>
-                            </Border>
+                            <StackPanel Orientation="Horizontal" Margin="0,24,0,0">
+                                <Button x:Name="RunBtn" Content="🚀  Remove comments" Style="{StaticResource AccentBtn}" MinWidth="220" Height="50"/>
+                                <Button x:Name="PreviewBtn" Content="👁  Preview changes" Style="{StaticResource GhostBtn}" MinWidth="200" Height="50" Margin="12,0,0,0"/>
+                                <Button x:Name="ClearLogBtn" Content="Clear log" Style="{StaticResource GhostBtn}" Height="50" Margin="12,0,0,0"/>
+                            </StackPanel>
 
-                            <Border Background="{StaticResource BgSurface}" CornerRadius="12" Padding="16">
-                                <StackPanel>
-                                    <TextBlock Text="Elapsed time" Foreground="{StaticResource TextSub}" FontSize="12"/>
-                                    <TextBlock x:Name="ElapsedTxt" Text="0s"
-                                               Foreground="{StaticResource TextPrimary}" FontSize="22" FontWeight="Bold" Margin="0,4,0,0"/>
-                                </StackPanel>
-                            </Border>
-
-                            <TextBlock Text="💡 Drag &amp; drop a folder to begin"
-                                       Foreground="{StaticResource TextMuted}" FontSize="12"
-                                       HorizontalAlignment="Center" Margin="0,24,0,0" TextWrapping="Wrap"/>
+                            <TextBlock Text="Tip: previews let you audit comment removals before committing." Foreground="{StaticResource TextMuted}" FontSize="12" Margin="0,18,0,0"/>
                         </StackPanel>
                     </Border>
-                </Grid>
 
-                <!-- Supported types footer -->
-                <TextBlock Grid.Row="3"
-                           Text="Supported: JS  TS  JSX  TSX  CSS  HTML  Java  C#  C/C++  PHP  Python  Go  Rust  Swift"
-                           Foreground="{StaticResource TextMuted}" FontSize="11"
-                           HorizontalAlignment="Center" Margin="0,14,0,18"/>
-            </Grid>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="32"/>
+                            <ColumnDefinition Width="2*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Border Grid.Column="0" Style="{StaticResource GlassCard}" Padding="26" Background="#101D3CDD" Margin="0,28,0,0">
+                            <StackPanel>
+                                <StackPanel Orientation="Horizontal" Margin="0,0,0,14">
+                                    <TextBlock Text="Operation log" Foreground="{StaticResource TextPrimary}" FontSize="16" FontWeight="SemiBold"/>
+                                    <Border x:Name="ScanningBadge" Background="#273A72" CornerRadius="8" Padding="10,4" Visibility="Collapsed" Margin="10,0,0,0">
+                                        <TextBlock Text="● scanning" Foreground="{StaticResource Accent}" FontSize="12" FontWeight="SemiBold"/>
+                                    </Border>
+                                </StackPanel>
+                                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                                    <RichTextBox x:Name="LogBox" Background="Transparent" BorderThickness="0" Padding="18,8,18,18" FontFamily="Cascadia Code, Consolas" FontSize="12" Foreground="#D0D7F2" IsReadOnly="True"/>
+                                </ScrollViewer>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Grid.Column="2" Style="{StaticResource GlassCard}" Padding="26" Background="#10203FD9" Margin="0,28,0,0">
+                            <StackPanel>
+                                <TextBlock Text="Live progress" Foreground="{StaticResource TextPrimary}" FontSize="16" FontWeight="SemiBold"/>
+                                <TextBlock x:Name="FilesFoundTxt" Text="Files found: 0" Foreground="{StaticResource TextSub}" FontSize="13" Margin="0,8,0,0"/>
+                                <ProgressBar x:Name="ProgressBar" Margin="0,6,0,4"/>
+                                <Grid Margin="0,0,0,12">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock x:Name="FilesProcessedTxt" Text="0 / 0 files" Foreground="{StaticResource TextMuted}" FontSize="12"/>
+                                    <TextBlock x:Name="ProgressPctTxt" Grid.Column="1" Text="0%" Foreground="{StaticResource Accent}" FontSize="13" FontWeight="Bold"/>
+                                </Grid>
+
+                                <StackPanel Orientation="Horizontal">
+                                    <Border Style="{StaticResource MetricCard}" Padding="20" Margin="0,0,6,0">
+                                        <StackPanel>
+                                            <TextBlock Text="Comments" Foreground="{StaticResource TextMuted}" FontSize="12"/>
+                                            <TextBlock x:Name="CommentsRemovedTxt" Text="0" Foreground="{StaticResource Success}" FontSize="26" FontWeight="Bold" Margin="0,6,0,0"/>
+                                        </StackPanel>
+                                    </Border>
+                                    <Border Style="{StaticResource MetricCard}" Padding="20" Margin="12,0,0,0">
+                                        <StackPanel>
+                                            <TextBlock Text="Space saved" Foreground="{StaticResource TextMuted}" FontSize="12"/>
+                                            <TextBlock x:Name="SizeSavedTxt" Text="0 KB" Foreground="{StaticResource TextPrimary}" FontSize="24" FontWeight="Bold" Margin="0,6,0,0"/>
+                                        </StackPanel>
+                                    </Border>
+                                </StackPanel>
+
+                                <Border Background="#1A2F5D" CornerRadius="12" Padding="18" Margin="0,20,0,0">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Border Width="32" Height="32" CornerRadius="10" Background="#273F7B">
+                                            <TextBlock Text="⏱" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Border>
+                                        <StackPanel Margin="12,0,0,0">
+                                            <TextBlock Text="Elapsed" Foreground="{StaticResource TextMuted}" FontSize="11"/>
+                                            <TextBlock x:Name="ElapsedTxt" Text="0s" Foreground="{StaticResource TextPrimary}" FontSize="22" FontWeight="Bold" Margin="0,2,0,0"/>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Border>
+
+                                <TextBlock Text="Drag a folder anywhere onto this window to auto-fill the path." Foreground="{StaticResource TextMuted}" FontSize="12" TextWrapping="Wrap" Margin="0,18,0,0"/>
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+
+                    <TextBlock Text="Supported: JS  TS  JSX  TSX  CSS  HTML  Java  C#  C/C++  PHP  Python  Go  Rust  Swift" Foreground="{StaticResource TextMuted}" FontSize="11" HorizontalAlignment="Center" Margin="0,28,0,0"/>
+                </StackPanel>
+            </ScrollViewer>
 
             <!-- ============ PAGE: BACKUPS ============ -->
             <Grid x:Name="PageBackups" Visibility="Collapsed" Margin="36,32,36,0">
@@ -758,14 +767,14 @@ Add-Type -AssemblyName System.Windows.Forms
                     </Grid.ColumnDefinitions>
 
                     <!-- Backup List -->
-                    <Border Grid.Column="0" Background="{StaticResource BgCard}" CornerRadius="16" Padding="20"
+                    <Border Grid.Column="0" Background="{StaticResource BgCard}" CornerRadius="18" Padding="24"
                             BorderBrush="{StaticResource Border1}" BorderThickness="1">
                         <DockPanel>
-                            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0,0,0,16">
-                                <TextBlock Text="Backup Snapshots" Foreground="{StaticResource TextPrimary}"
-                                           FontSize="15" FontWeight="SemiBold" VerticalAlignment="Center"/>
+                            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0,0,0,18">
+                                <TextBlock Text="Backup snapshots" Foreground="{StaticResource TextPrimary}"
+                                           FontSize="16" FontWeight="SemiBold" VerticalAlignment="Center"/>
                                 <Button x:Name="RefreshBackupsBtn" Content="↻ Refresh" Style="{StaticResource GhostBtn}"
-                                        Margin="16,0,0,0" Padding="12,6" FontSize="12"/>
+                                        Margin="16,0,0,0" Padding="14,6" FontSize="12"/>
                             </StackPanel>
                             <ScrollViewer DockPanel.Dock="Top" VerticalScrollBarVisibility="Auto">
                                 <ListBox x:Name="BackupList"/>
@@ -778,31 +787,31 @@ Add-Type -AssemblyName System.Windows.Forms
                     </Border>
 
                     <!-- Backup Actions -->
-                    <Border Grid.Column="2" Background="{StaticResource BgCard}" CornerRadius="16" Padding="22,22"
+                    <Border Grid.Column="2" Background="{StaticResource BgCard}" CornerRadius="18" Padding="24"
                             BorderBrush="{StaticResource Border1}" BorderThickness="1">
                         <StackPanel>
                             <TextBlock Text="ACTIONS" Foreground="{StaticResource TextMuted}"
-                                       FontSize="10" FontWeight="SemiBold" Margin="0,0,0,16"/>
+                                       FontSize="10" FontWeight="SemiBold" Margin="0,0,0,20"/>
 
                             <Button x:Name="RestoreProjectBtn" Content="🔄  Restore Entire Project"
                                     Style="{StaticResource AccentBtn}" HorizontalAlignment="Stretch"
-                                    Height="44" Margin="0,0,0,10"/>
+                                    Height="46" Margin="0,0,0,12"/>
                             <Button x:Name="OpenBackupFolderBtn" Content="📂  Open in Explorer"
                                     Style="{StaticResource GhostBtn}" HorizontalAlignment="Stretch"
-                                    Height="40" Margin="0,0,0,10"/>
+                                    Height="42" Margin="0,0,0,12"/>
                             <Button x:Name="DeleteBackupBtn" Content="🗑  Delete This Backup"
-                                    Style="{StaticResource DangerBtn}" HorizontalAlignment="Stretch" Height="40"/>
+                                    Style="{StaticResource DangerBtn}" HorizontalAlignment="Stretch" Height="42"/>
 
-                            <Separator Background="{StaticResource Border1}" Margin="0,24,0,20" Height="1"/>
+                            <Separator Background="{StaticResource Border1}" Margin="0,26,0,22" Height="1"/>
 
                             <TextBlock Text="SELECTED BACKUP" Foreground="{StaticResource TextMuted}"
-                                       FontSize="10" FontWeight="SemiBold" Margin="0,0,0,12"/>
+                                       FontSize="10" FontWeight="SemiBold" Margin="0,0,0,14"/>
                             <TextBlock x:Name="BackupDetailName" Text="—" Foreground="{StaticResource TextPrimary}"
-                                       FontSize="14" FontWeight="Medium" TextWrapping="Wrap"/>
+                                       FontSize="14" FontWeight="Medium" TextWrapping="Wrap" Margin="0,0,0,6"/>
                             <TextBlock x:Name="BackupDetailDate" Text="" Foreground="{StaticResource TextSub}"
-                                       FontSize="12" Margin="0,6,0,0"/>
+                                       FontSize="12"/>
                             <TextBlock x:Name="BackupDetailFiles" Text="" Foreground="{StaticResource TextSub}"
-                                       FontSize="12" Margin="0,4,0,0"/>
+                                       FontSize="12" Margin="4,4,0,0"/>
                         </StackPanel>
                     </Border>
                 </Grid>
@@ -1351,6 +1360,153 @@ function Build-ExtensionPattern {
     return '\\.(' + ($parts -join '|') + ')$'
 }
 
+function Get-LineCommentTokens {
+    param([string]$Extension)
+
+    $ext = if ([string]::IsNullOrEmpty($Extension)) { "" } else { $Extension.ToLowerInvariant() }
+    $slashExts = @(".js", ".ts", ".jsx", ".tsx", ".java", ".cs", ".c", ".cpp", ".h", ".hpp", ".php", ".go", ".rs", ".swift", ".kt", ".scss", ".css", ".less")
+    $hashExts  = @(".py", ".rb", ".pl", ".php", ".ps1", ".psm1", ".sh", ".bash", ".zsh", ".yaml", ".yml", ".ini", ".cfg", ".toml")
+    $dashExts  = @(".sql", ".psql")
+
+    $tokens = @()
+    if ($slashExts -contains $ext) { $tokens += "//" }
+    if ($hashExts -contains $ext)  { $tokens += "#" }
+    if ($dashExts -contains $ext)  { $tokens += "--" }
+    return $tokens
+}
+
+function Remove-LineCommentFromLine {
+    param(
+        [string]$Line,
+        [string[]]$Tokens
+    )
+
+    if ([string]::IsNullOrEmpty($Line) -or $Tokens.Count -eq 0) { return $Line }
+
+    $chars      = $Line.ToCharArray()
+    $length     = $chars.Length
+    $inSingle   = $false
+    $inDouble   = $false
+    $inBacktick = $false
+    $inVerbatim = $false
+    $escaped    = $false
+
+    for ($i = 0; $i -lt $length; $i++) {
+        $ch = $chars[$i]
+
+        if ($escaped) { $escaped = $false; continue }
+
+        if ($inVerbatim) {
+            if ($ch -eq '"' -and $i + 1 -lt $length -and $chars[$i + 1] -eq '"') {
+                $i++
+                continue
+            }
+            if ($ch -eq '"') {
+                $inVerbatim = $false
+                $inDouble   = $false
+            }
+            continue
+        }
+
+        if ($ch -eq '\\') {
+            if ($inSingle -or $inDouble -or $inBacktick) {
+                $escaped = $true
+            }
+            continue
+        }
+
+        if ($ch -eq '"' -and -not $inSingle -and -not $inBacktick) {
+            if ($i -gt 0 -and $chars[$i - 1] -eq '@' -and -not $inDouble) {
+                $inVerbatim = $true
+                $inDouble   = $true
+            } else {
+                $inDouble = -not $inDouble
+            }
+            continue
+        }
+
+        if ($ch -eq "'" -and -not $inDouble -and -not $inBacktick) {
+            $inSingle = -not $inSingle
+            continue
+        }
+
+        if ($ch -eq '`' -and -not $inSingle -and -not $inDouble) {
+            $inBacktick = -not $inBacktick
+            continue
+        }
+
+        if ($inSingle -or $inDouble -or $inBacktick) { continue }
+
+        foreach ($token in $Tokens) {
+            switch ($token) {
+                '//' {
+                    if ($ch -eq '/' -and $i + 1 -lt $length -and $chars[$i + 1] -eq '/') {
+                        $prevIsColon = ($i -gt 0 -and $chars[$i - 1] -eq ':')
+                        $prevIsEscape = ($i -gt 0 -and $chars[$i - 1] -eq '\\')
+                        if (-not $prevIsColon -and -not $prevIsEscape) {
+                            return $Line.Substring(0, $i).TrimEnd()
+                        }
+                    }
+                }
+                '#' {
+                    if ($ch -eq '#') {
+                        return $Line.Substring(0, $i).TrimEnd()
+                    }
+                }
+                '--' {
+                    if ($ch -eq '-' -and $i + 1 -lt $length -and $chars[$i + 1] -eq '-') {
+                        return $Line.Substring(0, $i).TrimEnd()
+                    }
+                }
+            }
+        }
+    }
+
+    return $Line
+}
+
+function Remove-InlineCommentsFromContent {
+    param(
+        [string]$Content,
+        [string]$Extension
+    )
+
+    $tokens = Get-LineCommentTokens $Extension
+    if ($tokens.Count -eq 0) { return $Content }
+
+    $delimiter = if ($Content -match "`r`n") { "`r`n" } else { "`n" }
+    $lines     = [regex]::Split($Content, "\r?\n")
+    for ($idx = 0; $idx -lt $lines.Length; $idx++) {
+        $lines[$idx] = Remove-LineCommentFromLine -Line $lines[$idx] -Tokens $tokens
+    }
+    return [string]::Join($delimiter, $lines)
+}
+
+function Invoke-CommentRemoval {
+    param(
+        [string]$Content,
+        [string]$Extension,
+        [bool]$InlineOnly,
+        [bool]$PreserveLines
+    )
+
+    $result = $Content
+
+    if ($InlineOnly) {
+        $result = Remove-InlineCommentsFromContent -Content $result -Extension $Extension
+    } else {
+        $result = [regex]::Replace($result, '/\*[\s\S]*?\*/', '')
+        $result = [regex]::Replace($result, '<!--[\s\S]*?-->', '')
+        $result = Remove-InlineCommentsFromContent -Content $result -Extension $Extension
+    }
+
+    if (-not $PreserveLines) {
+        $result = [regex]::Replace($result, '(?m)^\s*$\r?\n', '')
+    }
+
+    return $result
+}
+
 function Append-Log {
     param([string]$Text, [string]$Color = "#C4C0E0")
     $para = New-Object Windows.Documents.Paragraph
@@ -1519,7 +1675,9 @@ $PreviewBtn.Add_Click({
         Show-Toast "Select at least one file type" "⚠️"
         return
     }
-    $skipDeps = $SetSkipDeps.IsChecked
+    $skipDeps      = $SetSkipDeps.IsChecked
+    $inlineOnly    = $SetInlineOnly.IsChecked
+    $preserveLines = $SetPreserveLines.IsChecked
 
     $files = Get-ChildItem $root -Recurse -File -ErrorAction SilentlyContinue |
         Where-Object {
@@ -1537,11 +1695,7 @@ $PreviewBtn.Add_Click({
     foreach ($file in $files) {
         $content = Get-Content $file.FullName -Raw -ErrorAction SilentlyContinue
         if ($null -eq $content) { continue }
-        $after = $content
-        $after = [regex]::Replace($after, '/\*[\s\S]*?\*/', '')
-        $after = [regex]::Replace($after, '(?m)^\s*//.*?$', '')
-        $after = [regex]::Replace($after, '<!--[\s\S]*?-->', '')
-        $after = [regex]::Replace($after, '(?m)^\s*#.*?$', '')
+        $after = Invoke-CommentRemoval -Content $content -Extension $file.Extension -InlineOnly:$inlineOnly -PreserveLines:$preserveLines
         $removed = $content.Length - $after.Length
         if ($removed -gt 0) {
             $totalEstimate += $removed
@@ -1587,6 +1741,7 @@ $RunBtn.Add_Click({
     $skipDeps   = $SetSkipDeps.IsChecked
     $inlineOnly = $SetInlineOnly.IsChecked
     $doBackup   = $SetAutoBackup.IsChecked
+    $preserveLines = $SetPreserveLines.IsChecked
 
     $backupRoot = $null
     if ($doBackup) {
@@ -1628,20 +1783,7 @@ $RunBtn.Add_Click({
         if ($null -eq $content) { continue }
 
         $before = $content.Length
-
-        if ($inlineOnly) {
-            $content = [regex]::Replace($content, '(?m)^\s*//.*?$', '')
-            $content = [regex]::Replace($content, '(?m)^\s*#.*?$', '')
-        } else {
-            $content = [regex]::Replace($content, '/\*[\s\S]*?\*/', '')
-            $content = [regex]::Replace($content, '(?m)^\s*//.*?$', '')
-            $content = [regex]::Replace($content, '<!--[\s\S]*?-->', '')
-            $content = [regex]::Replace($content, '(?m)^\s*#.*?$', '')
-        }
-
-        if (!$SetPreserveLines.IsChecked) {
-            $content = [regex]::Replace($content, '(?m)^\s*$\n', '')
-        }
+        $content = Invoke-CommentRemoval -Content $content -Extension $file.Extension -InlineOnly:$inlineOnly -PreserveLines:$preserveLines
 
         $after   = $content.Length
         $removed = $before - $after
