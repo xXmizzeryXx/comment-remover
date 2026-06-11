@@ -456,7 +456,7 @@ Add-Type -AssemblyName System.Windows.Forms
                     HorizontalAlignment="Right" VerticalAlignment="Top"
                     Margin="0,20,24,0" Padding="18,12" CornerRadius="10"
                     Background="#1E1433" BorderBrush="{StaticResource Accent}" BorderThickness="1"
-                    Visibility="Collapsed" Panel.ZIndex="99" MaxWidth="380"
+                    Visibility="Collapsed" Panel.ZIndex="99" MaxWidth="380">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock x:Name="ToastIcon" FontSize="16" VerticalAlignment="Center" Margin="0,0,10,0"/>
                     <TextBlock x:Name="ToastText" Foreground="{StaticResource TextPrimary}" FontSize="13"
