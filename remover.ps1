@@ -15,7 +15,7 @@ Add-Type -AssemblyName System.Windows.Forms
         Background="#0A0A0F"
         ResizeMode="CanResizeWithGrip"
         WindowStyle="SingleBorderWindow"
-        FontFamily="Segoe UI Variable, Segoe UI">
+        FontFamily="Segoe UI">
 
     <Window.Resources>
 
