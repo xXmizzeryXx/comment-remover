@@ -12,16 +12,10 @@ Add-Type -AssemblyName System.Windows.Forms
         Height="860" Width="1320"
         MinHeight="720" MinWidth="1100"
         WindowStartupLocation="CenterScreen"
+        Background="{StaticResource HeroGradient}"
         ResizeMode="CanResizeWithGrip"
         WindowStyle="SingleBorderWindow"
         FontFamily="Poppins, Segoe UI">
-    <Window.Background>
-        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-            <GradientStop Color="#1E2854" Offset="0"/>
-            <GradientStop Color="#131C38" Offset="0.45"/>
-            <GradientStop Color="#0B1022" Offset="1"/>
-        </LinearGradientBrush>
-    </Window.Background>
 
     <Window.Resources>
 
@@ -414,10 +408,6 @@ Add-Type -AssemblyName System.Windows.Forms
 
     <!-- ROOT GRID -->
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="280"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
         <!-- Ambient backdrop -->
         <Grid Grid.ColumnSpan="2" IsHitTestVisible="False">
             <Ellipse Width="480" Height="480" Fill="#3F42FF26" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="-160,-180,0,0" Effect="{StaticResource SoftGlow}"/>
@@ -431,6 +421,10 @@ Add-Type -AssemblyName System.Windows.Forms
                 </Rectangle.Fill>
             </Rectangle>
         </Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="280"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
 
         <!-- ====================================================
              SIDEBAR
@@ -454,7 +448,7 @@ Add-Type -AssemblyName System.Windows.Forms
                 <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0,0,0,12">
                     <TextBlock Text="PAGES" Foreground="{StaticResource TextMuted}" FontSize="11" FontWeight="SemiBold" LetterSpacing="0.4"/>
                     <Rectangle Width="1" Height="12" Fill="#2A3F68" Margin="12,0,12,0"/>
-                    <TextBlock Text="Explore &amp; manage" Foreground="{StaticResource TextSub}" FontSize="11"/>
+                    <TextBlock Text="Explore & manage" Foreground="{StaticResource TextSub}" FontSize="11"/>
                 </StackPanel>
 
                 <!-- Nav Buttons -->
@@ -621,7 +615,7 @@ Add-Type -AssemblyName System.Windows.Forms
                                 <StackPanel>
                                     <TextBlock Text="Helpful shortcuts" Foreground="{StaticResource TextPrimary}" FontSize="16" FontWeight="SemiBold" Margin="0,0,0,14"/>
                                     <StackPanel>
-                                        <TextBlock Text="• Drag &amp; drop any folder to load it instantly." Foreground="{StaticResource TextSub}" FontSize="12"/>
+                                        <TextBlock Text="• Drag & drop any folder to load it instantly." Foreground="{StaticResource TextSub}" FontSize="12"/>
                                         <TextBlock Text="• Toggle inline-only mode from Settings to preserve multi-line docs." Foreground="{StaticResource TextSub}" FontSize="12" Margin="0,10,0,0"/>
                                         <TextBlock Text="• Backups are stored alongside your project inside CC_Backups_*." Foreground="{StaticResource TextSub}" FontSize="12" Margin="0,10,0,0"/>
                                     </StackPanel>
